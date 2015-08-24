@@ -28,13 +28,16 @@ function UsersDAO(db) {
             user['email'] = email;
         }
 
-        // TODO: hw2.3
-    users.insert(user, function(err, inserted){
-        if (err) throw err;
+        users.insert(user, function (err, result) {
+            "use strict";
 
-        console.dir("Successfully inserted: " + JSON.stringify(inserted));
-        callback(null, user);
-    });
+            if (!err) {
+                console.log("Inserted new user");
+                return callback(null, result[0]);
+            }
+
+            return callback(err, null);
+        });
     }
 
     this.validateLogin = function(username, password, callback) {
@@ -65,9 +68,7 @@ function UsersDAO(db) {
             }
         }
 
-        // TODO: hw2.3
-    users.findOne({'_id': username}, validateUserDoc);  
-    
+        users.findOne({'_id': username}, validateUserDoc);  
     }
 }
 

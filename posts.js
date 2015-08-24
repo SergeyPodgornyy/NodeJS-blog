@@ -29,8 +29,10 @@ function PostsDAO(db) {
                 "date": new Date()}
 
         // now insert the post
-        // hw3.2 TODO
-        callback(Error("insertEntry Not Yet Implemented!"), null);
+        posts.insert(post, function(err,inserted) {
+          if (err) return callback(err, null);
+          callback(null, inserted[0].permalink);
+        });
     }
 
     this.getPosts = function(num, callback) {
@@ -81,8 +83,14 @@ function PostsDAO(db) {
             comment['email'] = email
         }
 
-        // hw3.3 TODO
-        callback(Error("addComment Not Yet Implemented!"), null);
+        posts.findOne({'permalink': permalink}, function(err, post) {
+            if (err) return callback(err, null);
+
+            posts.update({'_id':post._id}, {'$push':{'comments': comment}}, function(err,updated){
+              if (err) return callback(err, null);
+              callback(null, post);
+            });
+        });
     }
 }
 
