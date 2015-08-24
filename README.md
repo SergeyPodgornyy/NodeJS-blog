@@ -10,4 +10,7 @@ Blog project for M101JS
 Getting started
 
 npm install
+
+
+After that, start NodeJS application
 node app.js
