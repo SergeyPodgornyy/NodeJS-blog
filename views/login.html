@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <style type="text/css">
       .label {text-align: right}
       .error {color: red}
     </style>
+    <!-- Latest compiled and minified CSS of Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/signin.css">
 
   </head>
 
   <body>
-    <h2>Login</h2>
-    <form method="post">
-      <table>
-        <tr>
-          <td class="label">
-            Username
-          </td>
-          <td>
-            <input type="text" name="username" value="{{username}}">
-          </td>
-          <td class="error">
-          </td>
-        </tr>
+    <div class="container">
 
-        <tr>
-          <td class="label">
-            Password
-          </td>
-          <td>
-            <input type="password" name="password" value="">
-          </td>
-          <td class="error">
-	    {{login_error}}
-            
-          </td>
-        </tr>
+      <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">Please Login</h2>
+        <label for="inputEmail" class="sr-only label">Username</label>
+          <input type="text" id="inputEmail" class="form-control" name="username" value="{{username}}" placeholder="Username" required autofocus>
+              <p class="error">
+              </p>
+        <label for="inputPassword" class="sr-only label">Password</label>
+          <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" value="" required>
+              <p class="error">
+                {{login_error}}
+              </p>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+      </form>
 
-      </table>
-
-      <input type="submit">
-    </form>
+    </div> <!-- /container -->
   </body>
 
 </html>
