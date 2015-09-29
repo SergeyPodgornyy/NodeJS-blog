@@ -2,6 +2,12 @@
 	margin-top: 50px;
 }
 
+hr{
+	background-color: #6ca439;
+	color: #6ca439;
+	height:1px;
+}
+
 .posts{
 	background: #eee;
 	border: 2px solid #6ca439;
@@ -12,4 +18,9 @@
 
 .row h1{
 	color: #35791E
+}
+
+textarea{
+	width: 100%;
+	resize: vertical;
 }

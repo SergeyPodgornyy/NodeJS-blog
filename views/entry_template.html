@@ -45,6 +45,7 @@
 </nav>
 <div class="container content">
 <div class="row">
+	<div class="posts">
 	<a class="btn btn-lg btn-primary" href="/" role="button">Blog Home</a><br><br>
 
 	<h2><b>{{post['title']}}</b></h2>
@@ -62,15 +63,15 @@
 	        , <a href="/tag/{{tag}}">{{tag}}</a>
 	    {% endif %}
 	{% endfor %}
-	<p></p>
-	Comments:
+	<br><br>
+	<p><strong>Comments:</strong></p>
 	<ul>
 		{% for comment in post.comments %}
 		<form action="/like" method="POST">
 			<input type="hidden" name="permalink", value="{{post['permalink']}}">
 			<input type="hidden" name="comment_ordinal", value="{{loop.index0}}">
-			Author: {{comment['author']}}<br>
-			Likes: {{comment['num_likes']}} <input type="submit" value="Like"></form><br>
+			<b>Author:</b> {{comment['author']}}<br>
+			<b>Likes:</b> {{comment['num_likes']}} <input type="submit" value="Like"></form><br>
 			{{comment['body']}}<br>
 			<hr>
 		</form>
@@ -89,6 +90,7 @@
 				<input type="submit" value="Submit" class="btn btn-default">
 		</form>
 	</ul>
+	</div>
 </div>
 </div>
 </body>
