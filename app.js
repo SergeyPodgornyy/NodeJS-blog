@@ -2,6 +2,7 @@ var express = require('express')
   , app = express() // Web framework to handle routing requests
   , cons = require('consolidate') // Templating library adapter for Express
   , MongoClient = require('mongodb').MongoClient // Driver for connecting to MongoDB
+  , path = require('path')
   , routes = require('./routes'); // Routes for our application
 
 MongoClient.connect('mongodb://localhost:27017/blog', function(err, db) {
@@ -12,6 +13,7 @@ MongoClient.connect('mongodb://localhost:27017/blog', function(err, db) {
     app.engine('html', cons.swig);
     app.set('view engine', 'html');
     app.set('views', __dirname + '/views');
+    app.use(express.static(path.join(__dirname, 'public')));
 
     // Express middleware to populate 'req.cookies' so we can access cookies
     app.use(express.cookieParser());
@@ -22,6 +24,6 @@ MongoClient.connect('mongodb://localhost:27017/blog', function(err, db) {
     // Application routes
     routes(app, db);
 
-    app.listen(8082);
-    console.log('Express server listening on port 8082');
+    app.listen(3000);
+    console.log('Express server listening on port 3000');
 });

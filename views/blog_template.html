@@ -1,39 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Blog</title>
+
+<!-- Latest compiled and minified CSS of Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- Optional theme for Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
 </head>
 <body>
+	  
 
-{% if username %}
-Welcome {{username}}        <a href="/logout">Logout</a> | <a href="/newpost">New Post</a><p>
-{% else %}
-You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a><p>
-{% endif %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          {% if username %}
+          <a class="navbar-brand" href="#">Welcome {{username}}</a>
+          {% else %}
+          <a class="navbar-brand" href="#">You are not logged in!</a>
+          {% endif %}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+          {% if username %}
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/newpost">New Post</a></li>
+          {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+</nav>
 
-<h1>My Blog</h1>
+<div class="container content">
+<div class="row">
+	<h1><b>My Blog</b></h1>
 
-{% for post in myposts %}
-<h2><a href="/post/{{post['permalink']}}">{{post['title']}}</a></h2>
-Posted {{post['date']}} <i>By {{post['author']}}</i><br>
-Comments:
-<a href="/post/{{post['permalink']}}">{{post['comments']|length}}</a>
-<hr>
-{% autoescape false %}
-{{post['body']}}
-{% endautoescape %}
-<p>
-<p>
-<em>Filed Under</em>:
-{% for tag in post.tags %}
-    {% if loop.first %}
-        <a href="/tag/{{tag}}">{{tag}}</a>
-    {% else %}
-        , <a href="/tag/{{tag}}">{{tag}}</a>
-    {% endif %}
-{% endfor %}
-{% endfor %}
-<p>
+	{% for post in myposts %}
+	<div class="posts">
+	<h2><a href="/post/{{post['permalink']}}">{{post['title']}}</a></h2>
+	Posted {{post['date']}} <i>By {{post['author']}}</i><br>
+	Comments:
+	<a href="/post/{{post['permalink']}}">{{post['comments']|length}}</a>
+	<hr>
+	{% autoescape false %}
+	{{post['body']}}
+	{% endautoescape %}
+	<p></p>
+	<p></p>
+	<em>Filed Under</em>:
+	{% for tag in post.tags %}
+	    {% if loop.first %}
+	        <a href="/tag/{{tag}}">{{tag}}</a>
+	    {% else %}
+	        , <a href="/tag/{{tag}}">{{tag}}</a>
+	    {% endif %}
+	{% endfor %}
+	</div>
+	{% endfor %}
+	<p></p>
+</div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
 

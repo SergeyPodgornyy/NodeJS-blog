@@ -1,0 +1,15 @@
+.content{
+	margin-top: 50px;
+}
+
+.posts{
+	background: #eee;
+	border: 2px solid #6ca439;
+	border-radius: 5px;
+	padding: 20px;
+	margin-top: 20px;
+}
+
+.row h1{
+	color: #35791E
+}
