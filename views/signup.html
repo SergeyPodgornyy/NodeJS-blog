@@ -2,74 +2,69 @@
 
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign Up</title>
     <style type="text/css">
       .label {text-align: right}
       .error {color: red}
     </style>
+    <!-- Latest compiled and minified CSS of Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/signin.css">
 
   </head>
 
   <body>
-    Already a user? <a href="/login">Login</a><p>
-    <h2>Signup</h2>
-    <form method="post">
-      <table>
-        <tr>
-          <td class="label">
-            Username
-          </td>
-          <td>
-            <input type="text" name="username" value="{{username}}">
-          </td>
-          <td class="error">
-	    {{username_error}}
-            
-          </td>
-        </tr>
 
-        <tr>
-          <td class="label">
-            Password
-          </td>
-          <td>
-            <input type="password" name="password" value="">
-          </td>
-          <td class="error">
-	    {{password_error}}
-            
-          </td>
-        </tr>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="../">Blog</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav">
+              <li><a href="/login">Already a user? Login</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+  </nav>
+    
+    <div class="container">
 
-        <tr>
-          <td class="label">
-            Verify Password
-          </td>
-          <td>
-            <input type="password" name="verify" value="">
-          </td>
-          <td class="error">
-	    {{verify_error}}
-            
-          </td>
-        </tr>
+      <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">Sign up</h2>
+        <label for="inputEmail" class="sr-only label">Username</label>
+          <input type="text" id="inputEmail" class="form-control" name="username" value="{{username}}" placeholder="Username" required autofocus>
+              <p class="error">
+                {{username_error}}
+              </p>
+        <label for="inputPassword" class="sr-only label">Password</label>
+          <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" value="" required>
+              <p class="error">
+                {{password_error}}
+              </p>
+        <label for="verifyPassword" class="sr-only label">Verify Password</label>
+          <input type="password" id="verifyPassword" class="form-control" name="verify" placeholder="Password" value="" required>
+              <p class="error">
+                {{verify_error}}
+              </p>
+        <label for="inputEmail" class="sr-only label">Email (optional)</label>
+          <input type="text" id="inputEmail" class="form-control" name="email" placeholder="email@mail.com" value="{{email}}" required>
+              <p class="error">
+                {{email_error}}
+              </p>
 
-        <tr>
-          <td class="label">
-            Email (optional)
-          </td>
-          <td>
-            <input type="text" name="email" value="{{email}}">
-          </td>
-          <td class="error">
-	    {{email_error}}
-            
-          </td>
-        </tr>
-      </table>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      </form>
 
-      <input type="submit">
-    </form>
+    </div> <!-- /container -->
   </body>
 
 </html>
