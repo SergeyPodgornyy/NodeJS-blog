@@ -32,7 +32,11 @@ Posted {{post['date']}}<i> By {{post['author']}}</i><br>
 Comments:
 <ul>
 {% for comment in post.comments %}
+<form action="/like" method="POST">
+<input type="hidden" name="permalink", value="{{post['permalink']}}">
+<input type="hidden" name="comment_ordinal", value="{{loop.index0}}">
 Author: {{comment['author']}}<br>
+Likes: {{comment['num_likes']}} <input type="submit" value="Like"></form><br>
 {{comment['body']}}<br>
 <hr>
 {% endfor %}

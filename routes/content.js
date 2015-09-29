@@ -182,6 +182,33 @@ function ContentHandler (db) {
             return res.redirect("/post/" + permalink)
         });
     }
+
+    this.handleLike = function(req, res, next) {
+        "use strict";
+
+        var permalink = req.body.permalink;
+        permalink = sanitize(permalink).escape();
+
+        var comment_ordinal = req.body.comment_ordinal;
+
+        posts.getPostByPermalink(permalink, function(err, post) {
+            "use strict";
+
+            if (err) return next(err);
+
+            if (!post) return res.redirect("/post_not_found");
+
+            // it all looks good. increment the ordinal
+            posts.incrementLikes(permalink, comment_ordinal, function(err, post) {
+                "use strict";
+
+                if (err) return next(err);
+
+                // now redirect to the blog permalink
+                return res.redirect("/post/" + permalink)
+            });
+        });
+    }
 }
 
 module.exports = ContentHandler;

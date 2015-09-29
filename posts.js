@@ -29,9 +29,13 @@ function PostsDAO(db) {
                 "date": new Date()}
 
         // now insert the post
-        posts.insert(post, function(err,inserted) {
-          if (err) return callback(err, null);
-          callback(null, inserted[0].permalink);
+        posts.insert(post, function (err, result) {
+            "use strict";
+
+            if (err) return callback(err, null);
+
+            console.log("Inserted new post");
+            callback(err, permalink);
         });
     }
 
@@ -70,6 +74,21 @@ function PostsDAO(db) {
 
             if (err) return callback(err, null);
 
+            // XXX: Look here for final exam to see where we store "num_likes"
+
+            // fix up likes values. set to zero if data is not present
+            if (typeof post.comments === 'undefined') {
+                post.comments = [];
+            }
+
+            // Each comment document in a post should have a "num_likes" entry, so we have to
+            // iterate all the comments in the post to make sure that is the case
+            for (var i = 0; i < post.comments.length; i++) {
+                if (typeof post.comments[i].num_likes === 'undefined') {
+                    post.comments[i].num_likes = 0;
+                }
+                post.comments[i].comment_ordinal = i;
+            }
             callback(err, post);
         });
     }
@@ -83,15 +102,32 @@ function PostsDAO(db) {
             comment['email'] = email
         }
 
-        posts.findOne({'permalink': permalink}, function(err, post) {
+        posts.update({'permalink': permalink}, {'$push': {'comments': comment}}, function(err, numModified) {
+            "use strict";
+
             if (err) return callback(err, null);
 
-            posts.update({'_id':post._id}, {'$push':{'comments': comment}}, function(err,updated){
-              if (err) return callback(err, null);
-              callback(null, post);
-            });
+            callback(err, numModified);
         });
         
+    }
+
+    this.incrementLikes = function(permalink, comment_ordinal, callback) {
+        "use strict";
+
+        // Increment the number of likes
+        var selector = {};
+        selector['comments.' + comment_ordinal + '.num_likes'] = 1;
+        posts.update(
+            {'permalink': permalink}, 
+            { '$inc' : selector }, 
+            function(err, post) {
+                "use strict";
+
+                if (err) return callback(err, null);
+                console.dir(post);
+                callback(err, post);
+        });
     }
 }
 
