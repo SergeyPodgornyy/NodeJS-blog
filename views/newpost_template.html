@@ -1,29 +1,56 @@
 <!doctype HTML>
 <html>
 <head>
-<title>Create a new post</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Create a new post</title>
+	<!-- Latest compiled and minified CSS of Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          {% if username %}
+          <a class="navbar-brand" href="#">Welcome {{username}}</a>
+          {% else %}
+          <a class="navbar-brand" href="#">You are not logged in!</a>
+          {% endif %}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+          {% if username %}
+            <li><a href="/logout">Logout</a></li>
+          {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+</nav>
 
-{% if username %}
-Welcome {{username}}        <a href="/logout">Logout</a><p>
-{% else %}
-You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a><p>
-{% endif %}
-<a href="/">Blog Home</a><br><br>
-
-<form action="/newpost" method="POST">
-{{errors}}
-<h2>Title</h2>
-<input type="text" name="subject" size="120" value="{{subject}}"><br>
-<h2>Blog Entry<h2>
-<textarea name="body" cols="120" rows="20">{{body}}</textarea><br>
-<h2>Tags</h2>
-Comma separated, please<br>
-<input type="text" name="tags" size="120" value="{{tags}}"><br>
-<p>
-<input type="submit" value="Submit">
-
+<div class="container content">
+<div class="row">
+	<div class="posts">
+	<a class="btn btn-lg btn-primary" href="/" role="button">Blog Home</a><br><hr>
+	<form action="/newpost" method="POST">
+		{{errors}}
+		<h2>Title</h2>
+			<input type="text" name="subject" size="120" value="{{subject}}"><br><br>
+		<h2>Blog Entry</h2>
+			<textarea name="body" cols="120" rows="20">{{body}}</textarea><br><br>
+		<h2>Tags</h2>
+		<p><em>Comma separated, please</em></p>
+		<input type="text" name="tags" size="120" value="{{tags}}"><br>
+		<br><hr>
+		<input type="submit" value="Submit" class="btn btn-primary">
+	</form>
+	</div>
+</div>
+</div>
 </body>
 </html>
 
