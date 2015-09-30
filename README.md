@@ -1,16 +1,16 @@
 NodeJS blog using MongoDB
 =========================
-
+In the project, you will find a blogging platform, backed by `MongoDB`.
 
 # Blog project for M101JS
-
-`./app.js - entry point`
-`./package.json - npm package description`
-`./posts.js - Posts Data Access Helper`
-`./sessions.js - Sessions Data Access Helper`
-`./users.js - Users Data Access Helper`
-`./views/ - html templates`
-
+```
+./app.js - entry point
+./package.json - npm package description
+./posts.js - Posts Data Access Helper
+./sessions.js - Sessions Data Access Helper
+./users.js - Users Data Access Helper
+./views/ - html templates
+```
 # Getting started
 
 ```
@@ -33,6 +33,10 @@ mongoimport -d blog -c posts < posts.json
 ```
 node app.js
 ```
+Note that this requires Node.js to be correctly installed on your computer. After you run the blog, you should see the message:
 
+Express server listening on port 3000
+If you goto `http://localhost:3000` you should see the front page of the blog. Here are some URLs that must work when you are done.
 
+---------------------------------------
 Visit my [website](http://grafo.in.ua/)
